@@ -1,6 +1,9 @@
 # CoreLib
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
+This library is a wrapper housing configurable header and siden avigation.
+
+Feels free to play around at (https://huzaifafcrit.github.io/ha-core-lib/)
 
 ## Code scaffolding
 
