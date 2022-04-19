@@ -5,11 +5,11 @@
     "baseUrl": "./",
     "paths": {
       "core-lib": [
-        "dist/core-lib/core-lib",
-        "dist/core-lib"
+        "docs/core-lib/core-lib",
+        "docs/core-lib"
       ]
     },
-    "outDir": "./dist/out-tsc",
+    "outDir": "./docs/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
