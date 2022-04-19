@@ -1,0 +1,39 @@
+.navbar-custom, .sidenav_container {
+  overflow: hidden !important;
+}
+
+span {
+  padding-left: 15px;
+}
+
+.navbar-custom .mat-list-item.mat-list-item-with-avatar {
+  padding-top: 0;
+  height: 48px;
+}
+
+.navbar-custom .mat-list-base {
+  padding-top: 0px;
+  justify-content: space-around;
+}
+
+.navbar-custom ::ng-deep.mat-list-item-content {
+  padding: 0 12px !important;
+}
+
+.border-color {
+  border: 3px;
+  border-color: #dcdcdc;
+}
+
+.active,
+.active:hover,
+.active:focus {
+  border-left: 5px solid #000061 !important;
+  color: #000061;
+  background-color: #e0e0e0;
+}
+
+.navbar-custom .active ::ng-deep.mat-list-item-content {
+  padding: 0 12px 0 7px !important;
+}
+

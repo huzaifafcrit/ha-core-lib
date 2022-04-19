@@ -1,0 +1,41 @@
+<div class="sidenav_container" [ngClass]="{'isApplicationAdmin': _coreService.loggedInUser.isApplicationAdmin }" [@onSideNavChange]="sideNavState || isSmallScreen ? 'open' : 'close'">
+  <div class="navbar-custom" fxLayout="column" fxLayoutGap="10px" style="height: 100%;">
+    <mat-nav-list>
+      <a mat-list-item class="border-bottom border-color" [ngClass]="_coreService.brand.class">
+        <mat-icon *ngIf="_coreService.brand.logoIsIcon"> {{ _coreService.brand.brandIcon }} </mat-icon>
+        <img *ngIf="_coreService.brand.logoIsImage" [src]="_coreService.brand.brandLogoImage" alt="logo" style="width: 24px; height: 24px;">
+        <span [@animateText]="linkText || isSmallScreen ? 'show' : 'hide'"> {{ _coreService.brand.title }} </span>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let workspaces of (_coreService.availableWorkspaces$ | async)" [routerLink]="workspaces.link"
+        (click)="isSmallScreen && closeNavbar()"
+        routerLinkActive="active" class="border-bottom border-color" placement="right" animation="true"
+        matTooltipClass="tooltip-custom" [matTooltip]="workspaces.name" matTooltipPosition="right">
+        <mat-icon>{{workspaces.icon}}
+        </mat-icon>
+        <span [@animateText]="linkText || isSmallScreen ? 'show' : 'hide'">{{ workspaces?.name }} </span>
+      </a>
+    </mat-nav-list>
+  </div>
+
+  <!-- <span class="spacer"></span> -->
+
+  <div class="navbar-custom" fxLayout="column" fxLayoutGap="10px">
+    <mat-nav-list>
+      <a *ngIf="_coreService.loggedInUser.isApplicationAdmin" mat-list-item class="border-top border-color" routerLink="/admin" routerLinkActive="active" placement="right"
+        animation="true" matTooltipClass="tooltip-custom" container="body" matTooltip="Application Settings" matTooltipPosition="right"
+        (click)="isSmallScreen && closeNavbar()">
+        <mat-icon>settings</mat-icon>
+        <span [@animateText]="linkText || isSmallScreen ? 'show' : 'hide'">Admin</span>
+      </a>
+      <a mat-list-item (click)="minimise()" class="border-top border-color" placement="right" animation="true"
+        matTooltipClass="tooltip-custom" matTooltipPosition="right" [matTooltip]="sideNavState ? 'Collapse' : 'Expand'">
+        <mat-icon *ngIf="sideNavState || isSmallScreen">arrow_back_ios</mat-icon>
+        <mat-icon *ngIf="!sideNavState && !isSmallScreen">double_arrow</mat-icon>
+        <span [@animateText]="linkText || isSmallScreen ? 'show' : 'hide'">Collapse</span>
+      </a>
+    </mat-nav-list>
+  </div>
+</div>

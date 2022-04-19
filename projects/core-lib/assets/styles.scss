@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-drawer-content {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden !important;
+}
+
+.txt_primary {
+  color: #000061;
+}
+
+.bg_primary:enabled {
+  background-color: #000061 !important;
+  color: #fff;
+}
+
+.bg_primary:enabled .mat-icon {
+  color: #fff !important;
+}
+
+
+// drawer
+
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+
+/* header dropdown menu */
+.notifications .mat-menu-item,
+.user_settings .mat-menu-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: x-small;
+}
+
+.notifications .mat-menu-item:first-child {
+  font-size: unset;
+  background-color: #fff !important;
+  color: #000061;
+  pointer-events: none;
+}
+
+.mat-menu-item .mat-icon {
+  margin: 0;
+  font-size: large;
+  height: 20px;
+  width: 24px;
+}
+
+.notifications a:hover,
+.user_settings a:hover {
+  color: #000061 !important;
+}
+
+.mat-menu-content:not(:empty) {
+  padding: 0 !important;
+}
+
+.mat-menu-panel {
+  min-height: 45px !important;
+}
+
+
+/* tooltip */
+.tooltip-custom {
+  background-color: rgba(0, 0, 0, 0.9);
+  letter-spacing: 0.03rem;
+}

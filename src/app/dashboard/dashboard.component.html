@@ -1,0 +1,198 @@
+<div class="row">
+  <div class="col-md-4">
+    <h3><b>Developer</b></h3>
+    <div class="row">
+      <div class="col-3">
+        <img [src]="_coreService.loggedInUser.profilePicUrl" alt="profile pic"
+          style="width: 100%; height: auto; border-radius: 15px;">
+      </div>
+      <div class="col-9 d-flex flex-column justify-content-center">
+        <h3 class="mb-0">
+          <b>
+            {{ _coreService.loggedInUser.name }}
+          </b>
+        </h3>
+        <h4 class="my-1">
+          {{ _coreService.loggedInUser.email }}
+        </h4>
+        <h5 class="mb-0">
+            <a href="https://huzaifaanjumportfolio.web.app" class="portfolio">Portfolio (visit)</a>
+        </h5>
+      </div>
+    </div>
+    <div>
+      <br>
+      <h3>
+        <b>Description:</b>
+      </h3>
+      <ul>
+        <li>
+          Built on top of Angular material v12 and Bootstrap v5.
+        </li>
+        <li>
+          Uses Google fonts material icons.
+        </li>
+        <li>
+          A wrapper which houses a sidenav and header.
+        </li>
+        <li>
+          Configurable sidenav list.
+        </li>
+        <li>
+          Mobile Friendly.
+        </li>
+        <li>
+          Application admin page path is: <b>"/admin"</b>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="properties">
+      <h3>
+        <b>Configurable Properties:</b>
+      </h3>
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Ex. Amazon" [(ngModel)]="_coreService.brand.title">
+      </mat-form-field>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>SideNav</h4>
+          <p>
+            <mat-slide-toggle class="example-margin" color="primary" [checked]="_coreService.isSideMenuVisible"
+              (change)="_coreService.isSideMenuVisible = !_coreService.isSideMenuVisible">
+              Display Side Menu
+            </mat-slide-toggle>
+          </p>
+
+          <p *ngIf="_coreService.isSideMenuVisible">
+            <mat-slide-toggle class="example-margin" color="primary"
+              [checked]="_coreService.loggedInUser.isApplicationAdmin"
+              (change)="_coreService.loggedInUser.isApplicationAdmin = !_coreService.loggedInUser.isApplicationAdmin">
+              Is Application Admin
+            </mat-slide-toggle>
+          </p>
+
+          <h4>Header</h4>
+          <p>
+            <mat-slide-toggle class="example-margin" color="primary" [checked]="_coreService.isHeaderVisible"
+              (change)="toggleHeader()">
+              Display Header
+            </mat-slide-toggle>
+          </p>
+
+          <p *ngIf="_coreService.isHeaderVisible">
+            <mat-slide-toggle class="example-margin" color="primary" [checked]="_coreService.isStickyHeader"
+              (change)="_coreService.isStickyHeader = !_coreService.isStickyHeader"
+              *ngIf="_coreService.isHeaderVisible">
+              Sticky header
+            </mat-slide-toggle>
+          </p>
+          <p *ngIf="_coreService.isHeaderVisible">
+            <mat-slide-toggle class="example-margin" color="primary" [checked]="_coreService.displayNotifications"
+              (change)="_coreService.displayNotifications = !_coreService.displayNotifications"
+              *ngIf="_coreService.isHeaderVisible">
+              Display Notifications
+            </mat-slide-toggle>
+          </p>
+
+          <p *ngIf="_coreService.isHeaderVisible">
+            <mat-slide-toggle class="example-margin" color="primary"
+              [checked]="_coreService.loggedInUser.canEditProfile"
+              (change)="_coreService.loggedInUser.canEditProfile = !_coreService.loggedInUser.canEditProfile">
+              Can edit user profile
+            </mat-slide-toggle>
+          </p>
+
+          <p *ngIf="_coreService.isHeaderVisible">
+            <mat-slide-toggle class="example-margin" color="primary" [checked]="_coreService.loggedInUser.isPortalAdmin"
+              (change)="_coreService.loggedInUser.isPortalAdmin = !_coreService.loggedInUser.isPortalAdmin">
+              Is Portal Admin
+            </mat-slide-toggle>
+          </p>
+        </div>
+      </div>
+      <div class="my-2">
+        <b>
+          Header Actions:
+        </b>
+        <p class="my-2" *ngFor="let item of _loggerService.actions; last as last; first as first">
+          {{ item }}<span *ngIf="!last && _loggerService.actions.length !== 1">,</span>
+        </p>
+        <p class="my-2" *ngIf="_loggerService.actions.length === 0">
+          No user header related actions recorded yet.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <h3>
+      <b>Installation and Setup</b>
+    </h3>
+    <ul>
+      <li>
+        Install package: <b>npm i ha-core-lib</b>
+      </li>
+      <li>
+        Add style sheet reference in styles.scss: <br> <b>@import '@core-lib/assets/styles.scss';</b>
+      </li>
+      <li>
+        Import CoreLibModule in AppModule.
+      </li>
+      <li>
+        In App component.html <b>use the selector</b> as follow: <br>
+        <img src="../../assets/imgs/app-component-html.png" alt="app-component-html" style="width: 100%; height: auto;">
+      </li>
+      <li>
+        In App component.ts <b>import CoreLibService</b> and provide inputs: <br>
+        <img src="../../assets/imgs/app-component-ts.png" alt="app-component-html" style="width: 100%; height: auto;">
+      </li>
+    </ul>
+  </div>
+
+</div>
+<br>
+<div class="row json">
+  <div class="col-md-4">
+    <h3>
+      <b>Logged In user sample Json</b>
+      <button style="float: right;" mat-icon-button [copy-clipboard]="JSONtoString(_coreService.loggedInUser)"
+        (copied)="notify()" matTooltip="copy to clipboard" matTooltipPosition="left" matTooltipClass="tooltip-custom">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </h3>
+    <div class="card p-3">
+      <pre class="mb-0">{{ _coreService.loggedInUser | json }}</pre>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>
+      <b>Workspaces/Tabs sample Json</b>
+      <button style="float: right;" mat-icon-button [copy-clipboard]="JSONtoString(_coreService.loggedInUser)"
+        (copied)="notify()" matTooltip="copy to clipboard" matTooltipPosition="left" matTooltipClass="tooltip-custom">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </h3>
+    <div class="card">
+      <pre class="mb-0">{{ _coreService.availableWorkspaces | json }}</pre>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>
+      <b>Notification sample Json</b>
+      <button style="float: right;" mat-icon-button [copy-clipboard]="JSONtoString(_coreService.notifications)"
+        (copied)="notify()" matTooltip="copy to clipboard" matTooltipPosition="left" matTooltipClass="tooltip-custom">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </h3>
+    <div class="card" style="height: 83vh; overflow-y: auto;">
+      <pre class="mb-0">{{ _coreService.notifications | json}}</pre>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>

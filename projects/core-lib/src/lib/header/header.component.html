@@ -1,0 +1,62 @@
+<div class="d-flex w-100 py-2 justify-content-between align-items-center">
+  <div *ngIf="isSmallScreen && sidenav">
+    <a mat-icon-button class="logo_conatiner" style="width: unset;" (click)="sidenav?.toggle();">
+      <mat-icon>menu</mat-icon>
+    </a>
+  </div>
+
+  <div>
+    <span class="title txt_primary"> {{ _coreService.brand.title }} </span>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div *ngIf="_coreService.displayNotifications">
+      <a mat-icon-button [matMenuTriggerFor]="notification_menu" aria-label="Example icon-button with a menu"
+        class="header-icons" disableRipple="true">
+        <mat-icon class="txt_primary" [matBadge]="unreadCount" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+      </a>
+      <mat-menu #notification_menu="matMenu" class="notifications">
+        <a mat-menu-item class="txt_primary">Notifications</a>
+        <a mat-menu-item *ngFor="let item of (_coreService.notifications$ | async);trackBy:trackByMethod" (click)="notificationClicked(item)">
+          <mat-icon [style.color]="item.icon.color" *ngIf="item.icon"> {{ item.icon.value }} </mat-icon>
+          <mat-icon *ngIf="item.isImg">
+            <img [src]="item.imgUrl" alt="img" style="height: 24px; height: 24px; border-radius: 50%;">
+          </mat-icon>
+          <div [ngClass]="{'text-muted': item.isRead}">
+            {{ item.text }}
+          </div>
+        </a>
+        <a mat-menu-item class="txt_primary justify-content-center">Mark all as read</a>
+      </mat-menu>
+    </div>
+    <div>
+      <a mat-icon-button [matMenuTriggerFor]="user_menu" aria-label="Example icon-button with a menu"
+        class="header-icons" disableRipple="true">
+        <img [src]="_coreService.loggedInUser.profilePicUrl" alt="Avatar" class="avatar">
+      </a>
+      <mat-menu #user_menu="matMenu" class="user_settings">
+        <div mat-menu-item class="details" *ngIf="_coreService.loggedInUser.name">
+          <span> {{ _coreService.loggedInUser.name }} </span>
+          <b>{{ _coreService.loggedInUser.email }}</b>
+        </div>
+        <a *ngIf="_coreService.loggedInUser.isPortalAdmin" mat-menu-item (click)="onClick(CoreActionEnum.PortalSettings)" matTooltip="Go to portal settings"
+          matTooltipClass="tooltip-custom" matTooltipPosition="left">
+          <mat-icon style="color: orangered;">construction</mat-icon>
+          <span>Portal Settings</span>
+        </a>
+        <a *ngIf="_coreService.loggedInUser.canEditProfile" mat-menu-item (click)="onClick(CoreActionEnum.EditProfile)" matTooltip="Edit you profile details"
+          matTooltipClass="tooltip-custom" matTooltipPosition="left">
+          <mat-icon style="color: #000061;">edit</mat-icon>
+          <span>Edit Profile</span>
+        </a>
+        <a mat-menu-item (click)="onClick(CoreActionEnum.Logout)" matTooltip="Logout from the portal"
+          matTooltipClass="tooltip-custom" matTooltipPosition="left">
+          <mat-icon style="color: purple;">exit_to_app</mat-icon>
+          <span>Logout</span>
+        </a>
+      </mat-menu>
+    </div>
+
+  </div>
+
+</div>

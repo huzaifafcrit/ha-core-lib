@@ -1,0 +1,13 @@
+<mat-sidenav-container class="main_content" [hasBackdrop]="isSmallScreen">
+  <mat-sidenav #leftSidenav [mode]="isSmallScreen ? 'over' : 'side'" [opened]="!isSmallScreen" *ngIf="_coreService.isSideMenuVisible">
+    <ha-left-menu [sidenav]="leftSidenav" [isSmallScreen]="isSmallScreen"></ha-left-menu>
+  </mat-sidenav>
+  <mat-sidenav-content [@onMainContentChange]="!isSmallScreen ? onSideNavChange ? 'open': 'close': ''">
+    <div class="container-fluid" *ngIf="_coreService.isHeaderVisible">
+      <ha-header *ngIf="viewInitialized" (notificationClickEvent)="notification($event)" (headerEvent)="headerEvent($event)" [sidenav]="leftSidenav" [isSmallScreen]="isSmallScreen"></ha-header>
+    </div>
+    <div class="container-fluid custom_container_wrapper" [ngClass]="{'sticky_header': _coreService.isStickyHeader}">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
